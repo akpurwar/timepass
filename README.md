@@ -1,177 +1,133 @@
-# timepass
-
-
 <!DOCTYPE html>
-<html lang="en">
-<head>
-   <title>registration</title>
-   <script src =validate.js></script>
-</head>
-<body>
-    <table style="width:50px">
-    <tr>
-        <td>Name</td>
-            <td><input type="text" id = "textname">   </td>
-             <td> <span id = "errspanname"> </span>  </td>   
-    </tr>
-    <tr>
-            <td>Age</td>
-        <td><input type="text" id = "textage">   </td>
-         <td> <span id = "errspanage"> </span>  </td>   
-</tr>
-<tr>
-        <td>Email</td>
-    <td><input type="text" id = "textemail">   </td>
-     <td> <span id = "errspanemail"> </span>  </td>   
-</tr>
-<tr>
-        <td>password</td>
-    <td><input type="text" id = "textpassword">   </td>
-     <td> <span id = "errpassword"> </span>  </td>   
-</tr>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Calculator</title>
+		<link rel="stylesheet" href="calc.css">
+	</head>
+	<body>
+		<center>
+			<h2>Calculator</h2>
+			<div class="Wrapper">	
+				<div class="screen">
+					<input id="screen">
+				</div>
+				<div class="keypad">
+					<button value="7" onclick="calculate(this)">7</button>
+					<button value="8">8</button>
+					<button value="9">9</button>
+					<button value="/">/</button><br>	
+					<button value="4">4</button>
+					<button value="5">5</button>
+					<button value="6">6</button>
+					<button value="*">*</button><br>
+					<button value="1">1</button>
+					<button value="2">2</button>
+					<button value="3">3</button>
+					<button value="-">-</button><br>
+					<button value="0">0</button>
+					<button value=".">.</button>
+					<button value="=">=</button>
+					<button value="+">+</button><br>
+					<button value="reset" type="reset">Reset</button>
+					<button value="sci" onmousemove="scientific()">Scientific</button>
+					<div id = "show">
+						
 
-<tr>
-        <td>confirm password</td>
-    <td><input type="text" id = "textconfirmpassword">   </td>
-     
-</tr>
-<tr>
-       
-    <td colspan="3"><input type="button" id = "bregister" value="Register" onclick = "validate()">   </td>
-     
-</tr>
- </table>
-</body>
+					</div>	
+
+				</div>
+			</div>
+		</center>
+
+		<script>
+           var count = 0
+           function scientific(){
+			   
+			   var v = document.createElement("button")
+			 v.textContent = "sqrt";
+			 
+			   var x =  document.getElementById("show");
+			   count++;
+			    if(count<=3){
+
+			
+			x.append(v);
+			
+			
+				}
+
+		
+		   }
+			var buttons = document.getElementsByTagName('button');
+			for (var i = 0, len = buttons.length; i < len; i++) {
+				buttons[i].onclick = function (){
+					
+					
+					console.log(this.value);
+					if((this.value)=="reset"){
+						document.getElementById("screen").value=" ";
+					}
+					else if((this.value)=="="){
+
+					
+						var result = eval(document.getElementById("screen").value);
+						document.getElementById("screen").value = result;
+
+
+						show.addEventListener('click',()=>{
+				 var sq = Math.sqrt(document.getElementById("screen").value);
+				 console.log(sq);
+				 document.getElementById("screen").value = sq;
+			})
+
+
+
+
+
+					}
+					else if((this.value)=="sci"){
+						
+						scientific();
+					}
+					else {
+						document.getElementById("screen").value += this.value;
+					}
+				}
+			}
+		</script>		
+	</body>
 </html>
 
 
-
-
-
-
-
-function validate()
-    {
-        debugger;
-       var isnameempty = Validateempty("textname","errspanname","name is required");
-       if(isnameempty == false)
-       {
-           validtextonly("textname","errspanname","Name can not be number");
-       }
-        var isageempty = Validateempty("textage","errspanage","age is required");
-        if(isageempty == false)
-        {
-           var isitnumber = validnumberonly("textage","errspanage","age can not be character ");
-           if(isitnumber == true)
-           {
-            validrangeonly("textage","errspanage","age must be in rang ",18,50)      ;
-           }
-
-        }
-
-        Validateempty("textemail","errspanemail","email is required");
-
-      var ispassword =  Validateempty("textpassword","errpassword","password is required");
-if(ispassword == false)
-{
-    validpassword("textpassword","textconfirmpassword","errpassword","password must match") ;
+.Wrapper{
+	height:300px;
+	width:300px;
+	background-color:#eee;
+	padding:20px;
 }
 
-
-    }
-
-
-
-
-
-        function Validateempty(id,spanid,errmsg)
-{
-    debugger;
-    isitempty = true;
-   var element = document.getElementById(id);
-   var errspan = document.getElementById(spanid);
-    if(element.value == "")
-    {
-        errspan.innerText = errmsg;
-     isitempty = true;
-    }
-    else
-       {
-        errspan.innerText = "";
-        isitempty = false;
-       }     
-       return isitempty;
-}
-    function validtextonly(id,spanid,errmsg)
-    {
-        var element = document.getElementById(id);
-   var errspan = document.getElementById(spanid);
-   if(isNaN(element.value))
-   {
-    errspan.innerText = "";
-
-   }
-   else{
-    errspan.innerText = errmsg;
-      
-   }
-    }
-
-function validnumberonly(id,spanid,errmsg)
-{
-isitnumber = true;
-var element = document.getElementById(id);
-   var errspan = document.getElementById(spanid);
-   if(isNaN(element.value))
-   {
-    errspan.innerText =errmsg;
-    isitnumber = false;
-
-   }
-   else{
-    errspan.innerText = "";
-    isitnumber = true;
-      
-   }
-   return isitnumber;
+.screen{
+	background-color:white;
+	margin-bottom:20px; 
+	box-shadow: 5px 5px 5px #888888;
 }
 
-function validrangeonly(id,spanid,errmsg,min,max)
-{
-    isitvalidrange =true;
-    var element = document.getElementById(id);
-   var errspan = document.getElementById(spanid);
-   var validvalue = parseInt(element.value)
-   if(validvalue<min || validvalue>max)
-   {
-    errspan.innerText = errmsg;
-    isitvalidrange = false;   
-   }
-   else
-   {
-       errspan.innerText = "";
-       isitvalidrange = true;
-   }
-return isitvalidrange;
+#screen{
+	margin:15px;
+	height:25px;
+	width:270px;
+	border:2px solid #eee;
 }
 
-function validpassword(id,idconfirm,spanid,errmsg)
-{
-    isvalidpassword = true;
-    var element = document.getElementById(id);
-    var elementconfirm = document.getElementById(idconfirm)
-   var errspan = document.getElementById(spanid);
-   if(element.value == elementconfirm.value )
-   {
-       errspan.innertext = ""
-       isvalidpassword = true;
-   }
-   else
-   {
-       errspan.innerText = errmsg;
-       isvalidpassword = false;
-   }
-   return isvalidpassword ;
-       
+.keypad{
+	height:auto;
+}
 
+.keypad button{
+	width:65px;
+	height:40px;
+	margin:3px;
+	color:#666;
+	box-shadow: 5px 5px 5px #888888;
 }
