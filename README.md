@@ -175,7 +175,36 @@ $("#Edit").click(function () {
 
 
 
+$("#Edit").click(function () {
+      alert("in update");
+           var name = $("#Name").val();
+           console.log(name);
+       
+           comment = $("#Comment").val();
+           console.log(comment);
+           
+          $.ajax({
+           url: "http://localhost:3001/comments/2",
+           type: "PUT",
+           data: JSON.stringify({
+             name: name,
+             comment: comment,
+             //Date: date,
+           }),
+          
+           contentType: "application/json; charset=utf-8",
+           dataType: "json",
+           async: false,
+          
+           success: function (data) {
+             
+             console.log(data)
+             console.log("New post Added Successfully");
+           },
+         });
+      });
 
+    });
 
 
 
